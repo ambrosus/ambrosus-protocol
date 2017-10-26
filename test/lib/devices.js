@@ -1,7 +1,7 @@
 import Devices from '../../lib/Devices';
 import * as Errors from '../../lib/Errors';
 
-contract('Devices', (accounts) => {
+contract('Devices Interface', (accounts) => {
 
   let devices;
   let ownerAddress = accounts[0];
