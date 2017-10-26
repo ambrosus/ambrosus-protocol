@@ -13,8 +13,8 @@ contract('Config', (accounts) => {
     });
 
     it('overwrite default', async () => {
-      let options = await Configuration.getTransactionOptions({from: accounts[1]});
-      assert.deepEqual(options, { from: accounts[1], gas: DEFAULT_GAS });
+      let options = await Configuration.getTransactionOptions({from: accounts[1], gas: 100});
+      assert.deepEqual(options, { from: accounts[1], gas: 100 });
 
     });
 
