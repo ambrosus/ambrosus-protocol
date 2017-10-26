@@ -1,13 +1,13 @@
 import Devices from '../../lib/Devices';
-import * as Errors from '../../lib/Errors';
+import { EthereumError } from '../../lib/Errors';
 
 contract('Devices Interface', (accounts) => {
 
   let devices;
   let ownerAddress = accounts[0];
-  let deviceAddress = '0x378cbCC0928DCA7e0d0aAFd67D22CBf7cCbF3c92';
-  let userAddress = '0xde89c7742f5205a509052d64f01d20b5f5b02b6b';
-  let deviceAddresses = ['0x4682Ec05bf3A2508BC0165062e9c2fcC218d89ED', '0xdBaa14dEbfAB834D285a9d2E4Ad9a8b277A78736'];
+  let deviceAddress = accounts[1];
+  let userAddress = accounts[2];
+  let deviceAddresses = [accounts[3], accounts[4]];
   let defaultOptions = { from: ownerAddress };
 
   let deployDevices = async () => {
@@ -74,9 +74,9 @@ contract('Devices Interface', (accounts) => {
     it('throws if adding from non-owner address', async () => {
       try {
         await devices.add(deviceAddress, { from: userAddress });
-        assert.fail("Should throw EthereumError");
+        assert.fail('Should throw EthereumError');
       } catch (e) {
-        assert(e instanceof Errors.EthereumError);
+        assert(e instanceof EthereumError);
       }
     });
 
@@ -106,38 +106,19 @@ contract('Devices Interface', (accounts) => {
     it('throws error when unauthorised remove of a device', async () => {
       try {
         await devices.remove(deviceAddresses[0], { from: userAddress });
-        assert.fail("Should throw EthereumError");
+        assert.fail('Should throw EthereumError');
       } catch (e) {
-        assert(e instanceof Errors.EthereumError);
+        assert(e instanceof EthereumError);
       }
     });
 
     it('can\'t remove non-existent device', async () => {
       try {
         await devices.remove(deviceAddress, defaultOptions);
-        assert.fail("Should throw EthereumError");
+        assert.fail('Should throw EthereumError');
       } catch (e) {
-        assert(e instanceof Errors.EthereumError);
+        assert(e instanceof EthereumError);
       }
-    });
-
-  });
-
-  describe('Failing when no web3', () => {
-
-    let oldWeb3;
-
-    before(() => {
-      oldWeb3 = web3;
-    });
-
-    it('no web3 when creating contract', async () => {
-      web3 = undefined;
-      assert.throws(()=>new Devices(), Errors.Web3NotFoundError);
-    });
-
-    after(() => {
-      web3 = oldWeb3;
     });
 
   });

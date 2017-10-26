@@ -1,21 +1,29 @@
 import Requirements from '../../lib/Requirements';
-import * as Errors from '../../lib/Errors';
+import Measurements from '../../lib/Measurements';
 
 contract('Requirements Interface', (accounts) => {
 
-  describe('Creating', () => {
-
-  });
-
-  xdescribe('Merging', () => {
-
-  });
-
-  xdescribe('Splitting', () => {
-
-  });
-
   describe('Validating measurements', () => {
+
+    it('validate single measurement', async () => {
+
+    });
+
+    it('not validate measurement with wrong value', async () => {
+
+    });
+
+    it('not validate measurement from unregistered device', async () => {
+
+    });
+
+    it('not validate measurement if can\'t prove it is real', async () => {
+
+    });
+
+    it('validate list of measurements', async () => {
+
+    });
 
   });
 });
