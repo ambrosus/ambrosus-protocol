@@ -12,7 +12,7 @@ contract('Measurements Interface', (accounts) => {
   let unauthorizedDevice = accounts[3];
   let defaultOptions = { from: ownerAddress };
   //IPFS client instance
-  let ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5001');
+  let ipfs = ipfsAPI('/ip4/127.0.0.1/tcp/5002');
 
   let testMeasurement = {
     id: 'Temperature',

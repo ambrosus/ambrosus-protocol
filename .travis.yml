@@ -9,8 +9,10 @@ before_install:
 
 script:
   - testrpc > testrpc.log &
-  - jsipfs daemon
+  - jsipfs init
+  - jsipfs daemon > ipfs.log &
   - sleep 5
   - npm test
 after_script:
   - cat testrpc.log
+  - cat ipfs.log

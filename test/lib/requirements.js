@@ -9,7 +9,7 @@ contract('Requirements Interface', (accounts) => {
   };
 
 
-  describe('Validating measurements', () => {
+  xdescribe('Validating measurements', () => {
 
     before(async () => {
       requirement = await new Requirements().deploy(attributes);
@@ -37,7 +37,7 @@ contract('Requirements Interface', (accounts) => {
 
   });
 
-  describe('Modifying requirements', () => {
+  xdescribe('Modifying requirements', () => {
 
     it('add attribute', async () => {
 
