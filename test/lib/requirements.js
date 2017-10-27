@@ -1,9 +1,19 @@
 import Requirements from '../../lib/Requirements';
-import Measurements from '../../lib/Measurements';
 
 contract('Requirements Interface', (accounts) => {
 
+  let requirement;
+  let attributes = {
+    Temperature: 12,
+    Calories: 3000
+  };
+
+
   describe('Validating measurements', () => {
+
+    before(async () => {
+      requirement = await new Requirements().deploy(attributes);
+    });
 
     it('validate single measurement', async () => {
 
@@ -25,5 +35,20 @@ contract('Requirements Interface', (accounts) => {
 
     });
 
+  });
+
+  describe('Modifying requirements', () => {
+
+    it('add attribute', async () => {
+
+    });
+
+    it('remove attribute', async () => {
+
+    });
+
+    it('can\'t modify when not authorised', async () => {
+
+    });
   });
 });
