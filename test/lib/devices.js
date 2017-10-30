@@ -112,4 +112,40 @@ contract('Devices Interface', (accounts) => {
 
   });
 
+  describe('Event Listening', () => {
+
+    it('Deployment', async () => {
+      let eventCalls = 0;
+      let devices = await new Devices().deploy()
+        .on('transactionHash', (tx) => { assert.match(tx, /^0x[a-z0-9]{64}$/); eventCalls++; })
+        .once('confirmation', (num, receipt) => { assert.equal(num, 0); eventCalls++; })
+        .on('receipt', (receipt) => { assert.isDefined(receipt); eventCalls++ });
+      assert.instanceOf(devices, Devices);
+      assert.equal(eventCalls, 3)
+    });
+
+    it('Add', async () => {
+      let eventCalls = 0;
+      await deployDevices();
+      await devices.add(deviceAddress, defaultOptions)
+        .on('transactionHash', (tx) => { assert.match(tx, /^0x[a-z0-9]{64}$/); eventCalls++; })
+        .once('confirmation', (num, receipt) => { assert.equal(num, 0); eventCalls++; })
+        .on('receipt', (receipt) => { assert.isDefined(receipt); eventCalls++ });
+      assert.equal(eventCalls, 3)
+    });
+
+    it('Remove', async () => {
+      let eventCalls = 0;
+      await deployDevices();
+      await devices.remove(deviceAddresses[0], defaultOptions)
+        .on('transactionHash', (tx) => { assert.match(tx, /^0x[a-z0-9]{64}$/); eventCalls++; })
+        .once('confirmation', (num, receipt) => { assert.equal(num, 0); eventCalls++; })
+        .on('receipt', (receipt) => { assert.isDefined(receipt); eventCalls++ });
+      assert.equal(eventCalls, 3)
+    });
+
+
+  });
+
+
 });
