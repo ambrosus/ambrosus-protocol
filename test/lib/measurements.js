@@ -8,7 +8,7 @@ contract('Measurements Interface', (accounts) => {
 
   let measurements;
   let ownerAddress = accounts[0];
-  let authorizedDevices = [accounts[1], accounts[2]];
+  let authorizedDevices = [accounts[0], accounts[1], accounts[2]];
   let unauthorizedDevice = accounts[3];
   let defaultOptions = { from: ownerAddress };
   //IPFS client instance
