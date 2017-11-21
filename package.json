@@ -1,5 +1,10 @@
 {
   "name": "ambrosus",
+  "version": "0.0.1",
+  "main": "./index.js",
+  "directories": {
+    "lib": "./lib"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-decorators": "^6.24.1",
@@ -10,8 +15,7 @@
     "babel-register": "^6.26.0"
   },
   "scripts": {
-    "test": "(testrpc > /dev/null&) && export IPFS_PATH=.ipfs && rm -rf $IPFS_PATH && jsipfs init && (jsipfs daemon&) && truffle compile && truffle test && pkill -9 node",
-    "build": "truffle build"
+    "test": "./test.sh"
   },
   "babel": {
     "presets": [
@@ -21,7 +25,7 @@
   "dependencies": {
     "ethereumjs-testrpc": "^6.0.1",
     "ipfs": "^0.26.0",
-    "ipfs-api": "^15.0.1",
+    "ipfs-api": "^15.1.0",
     "mocha": "^4.0.1",
     "truffle": "^4.0.1",
     "web3": "^1.0.0-beta.24",
