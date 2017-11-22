@@ -1,5 +1,6 @@
 import Devices from '../../lib/Devices';
 import { EthereumError } from '../../lib/Errors';
+import { assertThrowsEventually } from '../test_utils/utils';
 
 contract('Devices Interface', (accounts) => {
 
@@ -72,12 +73,8 @@ contract('Devices Interface', (accounts) => {
     });
 
     it('throws if adding from non-owner address', async () => {
-      try {
-        await devices.add(deviceAddress, { from: userAddress });
-        assert.fail('Should throw EthereumError');
-      } catch (e) {
-        assert(e instanceof EthereumError);
-      }
+      await assertThrowsEventually(
+        async () => await devices.add(deviceAddress, { from: userAddress }), EthereumError);
     });
 
     it('added device is valid', async () => {
@@ -104,21 +101,13 @@ contract('Devices Interface', (accounts) => {
     });
 
     it('throws error when unauthorised remove of a device', async () => {
-      try {
-        await devices.remove(deviceAddresses[0], { from: userAddress });
-        assert.fail('Should throw EthereumError');
-      } catch (e) {
-        assert(e instanceof EthereumError);
-      }
+      await assertThrowsEventually(
+        async () => await devices.remove(deviceAddresses[0], { from: userAddress }), EthereumError);
     });
 
     it('can\'t remove non-existent device', async () => {
-      try {
-        await devices.remove(deviceAddress, defaultOptions);
-        assert.fail('Should throw EthereumError');
-      } catch (e) {
-        assert(e instanceof EthereumError);
-      }
+      await assertThrowsEventually(
+        async () => await devices.remove(deviceAddress, defaultOptions), EthereumError);
     });
 
   });
